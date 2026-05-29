@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mxyor — Profile</title>
+    <meta name="description" content="mxyor | developer">
+    <meta name="author"      content="mxyor">
+    <meta property="og:title"       content="mxyor — Profile">
+    <meta property="og:description" content="mxyor | developer">
+    <meta property="og:url"         content="https://t.me/soldierswho">
+    <meta name="theme-color" content="#e8383a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="cursor-dot"  id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+    <canvas id="bg-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;"></canvas>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="scanlines"></div>
+    <div class="scan-beam"></div>
+    <div class="vignette"></div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <div id="start-screen">
+        <div class="ss-logo" data-text="mxyor">
+            <span>mxyor</span>
+        </div>
+        <div class="ss-sub">mxyor &bull; dev</div>
+        <div class="ss-bars">
+            <div class="ss-bar"></div>
+            <div class="ss-bar"></div>
+            <div class="ss-bar"></div>
+            <div class="ss-bar"></div>
+            <div class="ss-bar"></div>
+            <div class="ss-bar"></div>
+            <div class="ss-bar"></div>
+        </div>
+        <div class="ss-hint" id="start-hint"></div>
+    </div>
+    <div class="main" id="main">
+        <div class="card" id="card">
+
+            <div class="profile-header">
+
+                <!-- Avatar -->
+                <div class="avatar-wrap">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar-mask"></div>
+                    <img class="avatar"
+                         src="https://i.postimg.cc/KvP7n1LF/image.png"
+                         alt="mxyor avatar"
+                         loading="eager">
+                    <div class="avatar-status" title="Online"></div>
+                </div>
+
+                <div class="profile-info">
+
+                    <div class="name-row">
+                        <h1 class="profile-name" id="profile-name" data-text="mxyor">mxyor</h1>
+                    </div>
+
+                    <div class="badges">
+                        <span class="badge badge-owner" data-tip="Owner">
+                            Owner
+                        </span>
+                    </div>
+                    
+                    <p class="profile-bio" id="profile-bio"></p>
+
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-label">Links</div>
+            <div class="socials">
+                <a href="https://discord.com/users/1193568131768139777" target="_blank" rel="noopener noreferrer" class="social-btn btn-discord">
+                    <img src="assets/img/social/discord.png" alt="Discord">
+                    <span>wt<span class="social-sub">Discord</span></span>
+                </a>
+                <a href="https://t.me/soldierswho" target="_blank" rel="noopener noreferrer" class="social-btn btn-youtube">
+                    <img src="assets/img/social/telegram.png" alt="Telegram">
+                    <span>mxyor<span class="social-sub">Telegram</span></span>
+                </a>
+                <a href="https://www.tiktok.com/@mchbf" target="_blank" rel="noopener noreferrer" class="social-btn btn-tiktok">
+                    <img src="assets/img/social/tiktok.png" alt="TikTok">
+                    <span>mxyor<span class="social-sub">TikTok</span></span>
+                </a>
+            </div>
+
+            <div class="project-wrap">
+                <div class="project-block" id="project-btn" role="button" tabindex="0">
+                    <div class="pb-bg-pulse"></div>
+                    <div class="pb-content">
+                        <div class="pb-header">
+                            <h2 class="pb-title">Разработка — soldierswho.t.me</h2>
+                        </div>
+                        <div class="pb-desc">Сайты, Telegram-боты, Web App под ключ</div>
+                        <div class="pb-action-btn">НАЖМИ ЧТОБЫ УЗНАТЬ ПОДРОБНЕЕ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="visitor-box">
+                    <div class="vis-dot"></div>
+                    <div class="vis-text">
+                        <div class="vis-count" id="visitor-count">21234</div>
+                        <div class="vis-label">УНИКАЛЬНЫЕ И ХОСТЫ ПРОСМОТРЫ</div>
+                    </div>
+                </div>
+                <div class="audio-box">
+                    <audio id="bg-audio" src="./assets/audio/swerd.mp3" loop preload="auto">
+                        <source src="./assets/audio/swerd.mp3" type="audio/mpeg">
+                    </audio>
+                    <div class="vol-ctrl">
+                        <button class="vol-btn" id="vol-btn" title="Mute / Unmute"></button>
+                        <input type="range" id="vol-slider" class="vol-slider" min="0" max="1" step="0.01" value="0.25">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modal-close">&#x2715;</button>
+            <div class="modal-header">
+                <div class="modal-title">&#60;/&#62; mxyor</div>
+                <div class="modal-sub">Сайты, боты и Web App</div>
+            </div>
+            <div class="modal-body">
+                <div class="mblock">
+                    <div class="mblock-label">ОБО МНЕ</div>
+                    <p class="mblock-text">
+                        Я <strong>профессиональный разработчик</strong>: делаю
+                        <strong>сайты</strong>, <strong>Telegram-ботов</strong> и
+                        <strong>Telegram Web App</strong> (Mini App). Лендинги, визитки, многостраничники —
+                        а также боты под бизнес, автоматизацию, оплату и веб-приложения внутри Telegram.
+                    </p>
+                </div>
+                <div class="modal-divider"></div>
+                <div class="mblock">
+                    <div class="mblock-label">ЧЕМ ЗАНИМАЮСЬ</div>
+                    <ul class="mblock-list">
+                        <li> Сайты: лендинги, визитки, адаптивная вёрстка, доработка под ключ</li>
+                        <li> Telegram-боты: команды, сценарии, рассылки, CRM-логика</li>
+                        <li> Web App / Mini App: каталоги, личные кабинеты, формы, игры</li>
+                        <li> Оплата в боте: Stars, крипта, внешние платёжки</li>
+                        <li> API, базы данных, админки и интеграции с вашими сервисами</li>
+                    </ul>
+                </div>
+                <div class="modal-divider"></div>
+                <div class="mblock">
+                    <div class="mblock-label">СВЯЗЬ</div>
+                    <p class="mblock-text">Нужен сайт, бот или Web App — обсудим задачу в Telegram:</p>
+                    <div class="mblock-btns">
+                        <a href="https://t.me/soldierswho" target="_blank" rel="noopener noreferrer" class="mbtn mbtn-site">Telegram</a>
+                    </div>
+                </div>
+                <div class="modal-divider"></div>
+                <div class="mblock">
+                    <div class="mblock-label">ОПЛАТА</div>
+                    <p class="mblock-text">Принимаю оплату за разработку:</p>
+                    <div class="donate-grid">
+                        <div class="donate-item">
+                            <div class="donate-icon">&#x20B4;</div>
+                            <div class="donate-name">Гривня (UAH)</div>
+                            <div class="donate-desc">Monobank / Другие банки</div>
+                        </div>
+                        <div class="donate-item">
+                            <div class="donate-icon">&#8383;</div>
+                            <div class="donate-name">Крипта</div>
+                            <div class="donate-desc">USDT / TON</div>                        </div>
+                    </div>
+                    <div class="mblock-note">Реквизиты и сумму уточняйте в Telegram перед оплатой.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+</body>
+</html>
